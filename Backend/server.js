@@ -12,7 +12,6 @@ const io = new Server(server, {
 app.use(cors());
 app.use(express.json());
 
-let userRooms = {}; // Track users
 let messages = {}; // Store messages per user
 
 // WebSocket connection
@@ -23,7 +22,6 @@ io.on("connection", (socket) => {
     socket.on("joinRoom", (userName) => {
         if (!userName || userName === "null") return;
 
-        userRooms[socket.id] = userName; // Store user
         socket.join(userName); // Join personal room
         socket.join("Muayyad"); // Muayyad sees all chats
 
@@ -35,9 +33,6 @@ io.on("connection", (socket) => {
         } else {
             messages[userName] = [];
         }
-
-        // Update all users with the active user list
-        io.emit("activeUsers", Object.values(userRooms));
     });
 
     // Receive and send messages privately
@@ -55,16 +50,6 @@ io.on("connection", (socket) => {
 
         // Send message only to sender & Muayyad
         io.to(sender).to("Muayyad").emit("receiveMessage", chatMessage);
-    });
-
-    // Handle user disconnect
-    socket.on("disconnect", () => {
-        const userName = userRooms[socket.id];
-        if (userName) {
-            console.log(`❌ ${userName} disconnected`);
-            delete userRooms[socket.id]; // Remove from list
-            io.emit("activeUsers", Object.values(userRooms)); // Update list
-        }
     });
 });
 

@@ -69,12 +69,4 @@ document.addEventListener("DOMContentLoaded", function () {
     socket.on("messageHistory", (history) => {
         history.forEach(displayMessage);
     });
-
-    // Display active users
-    socket.on("activeUsers", (users) => {
-        const userList = document.getElementById("activeUsers");
-        userList.innerHTML = users
-            .map(user => `<li>${user}</li>`)
-            .join("");
-    });
 });
