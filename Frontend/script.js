@@ -11,17 +11,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to get or prompt for the user's name
     function getUserName() {
-        if (isOwner()) {
-            return "Muayyad"; 
-        }
-
         let userName = localStorage.getItem("chatUser");
+    
         if (!userName || userName === "null") {
             userName = prompt("Enter your name:")?.trim() || "Anonymous"; 
             localStorage.setItem("chatUser", userName);
         }
+    
+        // If username is "Muayyad", set it explicitly to ensure consistency
+        if (userName.toLowerCase() === "muayyad") {
+            return "Muayyad"; 
+        }
+    
         return userName;
     }
+    
 
     // Get the user's name
     let userName = getUserName();
