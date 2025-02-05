@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk-2-Muayyad</title>
+    <link rel="stylesheet" href="style.css">
+   
+    
+</head>
+<body>
+
+    <div class="container">
+        <h2>Talk-2-Muayyad</h2>
+        <div id="userNameDisplay"></div>
+        <div class="users-container">
+            <h3>Active Users</h3>
+            <ul id="activeUsers"></ul>
+        </div>
+        <div id="messages"></div>
+        <div class="typing-area">
+            <input type="text" id="message" placeholder="Type your message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
