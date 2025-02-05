@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const socket = io("http://localhost:3000");
+    const socket = io("https://talk2muayyad-chat-app.onrender.com");
 
     // Check connection
     socket.on("connect", () => console.log("✅ Connected to WebSocket"));
